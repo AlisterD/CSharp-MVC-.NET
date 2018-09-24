@@ -11,7 +11,9 @@ namespace Sample_TwentyOne
         static void Main(string[] args)
         {
             Deck deck = new Deck();
-            deck = Shuffle(deck);
+            int timesShuffle = 0;
+            deck = Shuffle(deck, out timesShuffle, 3);
+            
 
             foreach( Card card in deck.Cards)
             {
@@ -19,13 +21,21 @@ namespace Sample_TwentyOne
             }
             Console.WriteLine(deck.Cards.Count);
             Console.ReadLine();
+            Console.WriteLine("Times shuffle {0}", timesShuffle);
 
         }
 
-        public static Deck Shuffle(Deck deck)
+        public static Deck Shuffle(Deck deck,out int timesShuffle,  int times = 1)
         {
-            List<Card> TempList = new List<Card>();
-            Random random = new Random();
+            timesShuffle = 0;
+
+            for (int i = 0; i < times ; i++)
+            {
+                timesShuffle++;
+                List<Card> TempList = new List<Card>();
+                Random random = new Random();
+            }
+            
 
             while (deck.Cards.Count > 0)
             {
