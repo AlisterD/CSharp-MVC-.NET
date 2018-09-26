@@ -10,8 +10,7 @@ namespace Sample_TwentyOne
     {
         static void Main(string[] args)
         {
-            TwentyOne game = new TwentyOne();
-            game.Players = new List<string>() { "jesse", "doe", "Bill" };
+            
             Deck deck = new Deck();
             deck.Shuffle(3);
 
