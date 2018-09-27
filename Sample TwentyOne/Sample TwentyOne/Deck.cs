@@ -9,27 +9,18 @@ namespace Sample_TwentyOne
         public Deck()
         {
             Cards = new List<Card>();
-            List<string> Suits = new List<String>() { "Clubs", "Hearts", "Diamonds", "Spaces" };
-            List<String> Faces = new List<string>()
+            for (int i = 0; i < 13; i++)
             {
-                "Two", "Three", "Four", "Five", "Six", "Seven",
-                "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"
-
-            };
-
-            foreach (string face in Faces)
-            {
-                foreach (string suit in Suits)
+                for (int j = 0; j < 4; j++)
                 {
                     Card card = new Card();
-                    card.Suit = suit;
-                    card.Face = face;
+                    card.Face = (Face)j;
+                    card.Suit = (Suit)i;
                     Cards.Add(card);
                 }
             }
-
-
         }
+            
         public List<Card> Cards { get; set; }
 
 
@@ -41,17 +32,18 @@ namespace Sample_TwentyOne
 
                 List<Card> TempList = new List<Card>();
                 Random random = new Random();
-            }
-
-
+            
             while (Cards.Count > 0)
-            {
-                int randomIndex = Random.Next(0, Cards.Count);
-                TempList.Add(Cards[randomIndex]);
-                Cards.RemoveAt(randomIndex);
+                {
+                    int randomIndex = Random.Next(0, Cards.Count);
+                    TempList.Add(Cards[randomIndex]);
+                    Cards.RemoveAt(randomIndex);
+                }
+              Cards = TempList;
+                
             }
 
-            Cards = TempList;
+            
         }
     }
     
