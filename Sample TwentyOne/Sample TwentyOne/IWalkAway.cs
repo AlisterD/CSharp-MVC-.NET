@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace Sample_TwentyOne
 {
-   public  class TwentyOne : Game
+    interface IWalkAway
     {
-        public void Play()
-        {
-            throw new NotImplementedException();
-        }
+        void WalkAway(Player player);
     }
 }
