@@ -9,6 +9,8 @@ namespace Casino
 {
     public class Dealer
     {
+        public object player;
+
         public string Name { get; set; }
         public Deck Deck { get; set; }
         public int Balance { get; set; }
