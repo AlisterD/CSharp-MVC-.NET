@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace Sample_TwentyOne
+namespace Casino
 {
     public class Deck
     {
@@ -25,9 +25,6 @@ namespace Sample_TwentyOne
             }
             
         }
-
-
-
 
         public void Shuffle(int times = 3)
         {

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9092B31D-4B84-4879-AD85-3605B7ED6E99}</ProjectGuid>
+    <ProjectGuid>{5D6F3510-3EFF-4D8C-B9C0-CB251B6DBA2A}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Sample_TwentyOne</RootNamespace>
-    <AssemblyName>Sample TwentyOne</AssemblyName>
+    <RootNamespace>ConsoleApp25</RootNamespace>
+    <AssemblyName>ConsoleApp25</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Casino">
-      <HintPath>..\Casino\bin\Debug\Casino.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Store.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

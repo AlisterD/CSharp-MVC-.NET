@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sample_TwentyOne
+namespace ClassLibrary1
 {
-    interface IWalkAway
+    class Store
     {
-        void WalkAway(Player player);
     }
 }

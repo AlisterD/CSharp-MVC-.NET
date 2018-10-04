@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
-namespace Sample_TwentyOne
+namespace Casino
 {
     public class Dealer
     {
@@ -15,8 +16,16 @@ namespace Sample_TwentyOne
         public void Deal(List<Card> Hand)
         {
             Hand.Add(Deck.Cards.First());
-            Console.WriteLine(Deck.Cards.First().ToString() + "\n");
-            Deck.Cards.RemoveAt(0);
+            string card = string.Format(Deck.Cards.First().ToString() + "\n");
+            Console.WriteLine(card);
+            using (StreamWriter file = new StreamWriter(@"C:\Users\Student\Desktop\Clogs\logs.txt", true))
+            {
+                file.WriteLine(player.Id);
+            }
+
+
+                Deck.Cards.RemoveAt(0);
         }
+        
     }
 }
