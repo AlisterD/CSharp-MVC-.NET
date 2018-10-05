@@ -9,7 +9,7 @@ namespace Casino
 {
     public class Dealer
     {
-        public object player;
+       
 
         public string Name { get; set; }
         public Deck Deck { get; set; }
@@ -22,7 +22,8 @@ namespace Casino
             Console.WriteLine(card);
             using (StreamWriter file = new StreamWriter(@"C:\Users\Student\Desktop\Clogs\logs.txt", true))
             {
-                file.WriteLine(player.Id);
+                file.WriteLine(DateTime.Now);
+                file.WriteLine(card);
             }
 
 

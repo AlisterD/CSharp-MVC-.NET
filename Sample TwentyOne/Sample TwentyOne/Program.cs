@@ -1,18 +1,25 @@
 ﻿using System;
 using Casino;
 using Casino.TwentyOne;
+using System.Collections.Generic;
+using System.IO;
+using System.Data.SqlClient;
+using System.Data;
+using Sample_TwentyOne;
+
+
 
 namespace Sample_TwentyOne
-{ 
+{
 
     class Program
     {
         static void Main(string[] args)
         {
-            
+
             const string casinoName = "Grand Hotel and Casino";
 
-            
+
 
             Console.WriteLine("Welcome to the {0}. Let's start by telling me your name:", casinoName);
             string playerName = Console.ReadLine();
@@ -25,51 +32,78 @@ namespace Sample_TwentyOne
                 validAnswer = int.TryParse(Console.ReadLine(), out bank);
                 if (!validAnswer) Console.WriteLine("Please enter digits only, no decimals ");
             }
-
-           
+            
+              
             Console.WriteLine("Hello,{0}. Would you like to join a game of 21 right now?", playerName);
             string answer = Console.ReadLine().ToLower();
 
             if (answer == "yes" || answer == "yeah" || answer == "y" || answer == "sure" || answer == "ya")
-              {
+            {
                 Player player = new Player(playerName, bank);
                 player.Id = Guid.NewGuid();
                 Game game = new TwentyOneGame();
                 game += player;
-            
+
+
                 player.isActivelyPlaying = true;
-                while (player.isActivelyPlaying && player.Balance >0)
+                while (player.isActivelyPlaying && player.Balance > 0)
                 {
                     try
                     {
                         game.Play();
                     }
-                    catch (ArgumentException)
+                    catch (FraudException ex)
                     {
                         Console.WriteLine("Security! Kick this person out!");
+                        UpdateDbWithException(ex);
                         Console.ReadLine();
                         return;
                     }
-                    catch (FraudException)
+                    catch (Exception ex)
                     {
                         Console.WriteLine("An error ocurred. Please contact your System Admin.");
+                        UpdateDbWithException(ex);
                         Console.ReadLine();
                         return;
                     }
-                    
+
                 }
                 game -= player;
                 Console.WriteLine("Thank you for playing!");
-              }
+            }
 
             Console.WriteLine("Feel free to look around the casino. Bye for now.");
             Console.Read();
 
+        }
+        private static void UpdateDbWithException(Exception ex)
+        {
+            string connectionString = @"Data Source = (localdb)\ProjectsV13; Initial Catalog = TwentyOneGame; 
+            Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; 
+            ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
+            string queryString = @"INSERT INTO Exceptions (ExceptionType, ExceptionMessage, TimeStamp) VALUES
+                                   (@ExceptionType, @ExceptionMEssage, @TimeStamp)";
 
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.Add("@ExceptionType", sqlDbType.VarChar );
+                command.Parameters.Add("@ExceptionMessage", sqlDbType.VarChar);
+                command.Parameters.Add("@timeStamp", sqlDbType.DateTime);
+
+                command.Parameters["@ExceptionType"].Value = ex.GetType().ToString();
+                command.Parameters["@ExceptionMessage"].Value = ex.Message;
+                command.Parameters["@TimeStamp"].Value = DateTime.Now;
+
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+
+            }
         }
 
 
-
+    
    
     }
 

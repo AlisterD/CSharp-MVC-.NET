@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Casino
 {
@@ -20,13 +18,15 @@ namespace Casino
          }
 
 
-        private List<Card> _hand = new List<Card>();
-        public List<Card> Hand { get { return _hand; } set { _hand = value; } }
+        //private List<Card> _hand = new List<Card>();
+        // public List<Card> Hand { get { return _hand; } set { _hand = value; } }
+        public List<Card> Hand { get; set; } = new List<Card>(); 
         public int Balance { get; set; }
         public bool isActivelyPlaying { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public bool Stay { get; set; }
-        public Guid Id { get; set; }
+       
 
 
         public bool Bet (int amount)
