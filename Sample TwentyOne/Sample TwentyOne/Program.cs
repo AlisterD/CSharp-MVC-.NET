@@ -76,28 +76,28 @@ namespace Sample_TwentyOne
             Console.Read();
 
         }
-        private static void UpdateDbWithException(Exception ex)
+        private static void updatedbwithexception(exception ex)
         {
-            string connectionString = @"Data Source = (localdb)\ProjectsV13; Initial Catalog = TwentyOneGame; 
-            Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; 
-            ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
-            string queryString = @"INSERT INTO Exceptions (ExceptionType, ExceptionMessage, TimeStamp) VALUES
-                                   (@ExceptionType, @ExceptionMEssage, @TimeStamp)";
+            string connectionstring = @"data source = (localdb)\projectsv13; initial catalog = twentyonegame; 
+            integrated security = true; connect timeout = 30; encrypt = false; trustservercertificate = false; 
+            applicationintent = readwrite; multisubnetfailover = false";
+            string querystring = @"insert into exceptions (exceptiontype, exceptionmessage, timestamp) values
+                                   (@exceptiontype, @exceptionmessage, @timestamp)";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (sqlconnection connection = new sqlconnection(connectionstring))
             {
-                SqlCommand command = new SqlCommand(queryString, connection);
-                command.Parameters.Add("@ExceptionType", sqlDbType.VarChar );
-                command.Parameters.Add("@ExceptionMessage", sqlDbType.VarChar);
-                command.Parameters.Add("@timeStamp", sqlDbType.DateTime);
+                sqlcommand command = new sqlcommand(querystring, connection);
+                command.parameters.add("@exceptiontype", sqldbtype.varchar);
+                command.parameters.add("@exceptionmessage", sqldbtype.varchar);
+                command.parameters.add("@timestamp", sqldbtype.datetime);
 
-                command.Parameters["@ExceptionType"].Value = ex.GetType().ToString();
-                command.Parameters["@ExceptionMessage"].Value = ex.Message;
-                command.Parameters["@TimeStamp"].Value = DateTime.Now;
+                command.parameters["@exceptiontype"].value = ex.gettype().tostring();
+                command.parameters["@exceptionmessage"].value = ex.message;
+                command.parameters["@timestamp"].value = datetime.now;
 
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
+                connection.open();
+                command.executenonquery();
+                connection.close();
 
             }
         }
