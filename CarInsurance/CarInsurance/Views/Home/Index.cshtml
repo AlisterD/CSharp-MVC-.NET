@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<style>
+    body {
+        background-color: lightgrey;
+    }
+</style>
+<body>
+    <div class="row no-gutters m-3">
+        <div class="card col-sm-12 col-md-10 col-ld-6 mx-auto shadow">
+            <div class="card-header text-center">
+                <h2 class="m-0">Get a quote:</h2>
+            </div>
+        </div>
+        <div class="card-body text-center">
+            @using (Html.BeginForm("Quote", "Home", FormMethod.Post))
+            {
+                <center>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <input name="firstName" type="text" class="form-control" placeholder="First Name" required="required" />
+                            <input name="lastName" type="text" class="form-control" placeholder="Last Name" required="required" />
+                            <input name="emailAddress" type="email" class="form-control" placeholder="Email Address" required="required" />
+                            <input name="dob" type="date" class="form-control" placeholder="Date of Birth" required="required" />
+                            <input name="carYear" type="number" class="form-control" placeholder="Car Year" required="required" />
+                            <input name="carMake" type="text" class="form-control" placeholder="Car Make" required="required" />
+                            <input name="carModel" type="text" class="form-control" placeholder="Car Model" required="required" />
+                            <input name="tickets" type="number" class="form-control" placeholder="Number of Previous Tickets" required="required" />
+                        </div>
+                        <div class="row no-gutters">
+                            <div class="form-group">
+                                 <label> Do you have any DUI's? </label>
+                                 <center><input name="dui" type="checkbox" class="form-check-input" placeholder="past DUI/s" value="true" /></center>
+                            </div>
+                            <div class="form-group">
+                                <label>Would would like full coverage? </label>
+                                <center><input name="FullCoverage" type="checkbox" class="form-check" placeholder="Would you like full coverage?" value="true" /></center>
+                            </div>
+                        </div>
+                        <div class="row">
+                        </div>
+                        <button type="submit" class="btn-primary">Get your Quote!</button>
+                    </div>
+                </center>
+
+            }
+        </div>
+    </div>
+</body>
