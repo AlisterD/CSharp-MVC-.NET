@@ -13,9 +13,9 @@ namespace CarInsurance.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class InsuranceEntities : DbContext
+    public partial class QuoteSubmission : DbContext
     {
-        public InsuranceEntities()
+        public QuoteSubmission()
             : base("name=InsuranceEntities")
         {
         }

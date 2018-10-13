@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MVCPractical.Models
+namespace CarInsurance.Models
 {
-    public class QuoteSubmission
+    public partial class QuoteSubmission
     {
-        public int id { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string emailAddress { get; set; }
-        public DateTime dob { get; set; }
-        public int carYear { get; set; }
-        public string carMake { get; set; }
-        public string carModel { get; set; }
-        public int tickets { get; set; }
-        public bool dui { get; set; }
-        public bool fullCoverage { get; set; }
-        public decimal quotedPrice { get; set; }
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string EmailAddress { get; set; }
+        public DateTime Dob { get; set; }
+        public int CarYear { get; set; }
+        public string CarMake { get; set; }
+        public string CarModel { get; set; }
+        public int Tickets { get; set; }
+        public bool Dui { get; set; }
+        public bool FullCoverage { get; set; }
+        public decimal QuotedPrice { get; set; }
     }
 }
