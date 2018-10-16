@@ -17,35 +17,60 @@ namespace CarInsurance.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Quote(string firstName, string lastName, string emailAddress, DateTime DOB, int carYear, string carMake, string carModel, int tickets, Boolean fullCoverage = false, bool dui = false, int quote = 1 )
+        public ActionResult Quote(string firstName, string lastName, string emailAddress, DateTime DOB, int carYear, string carMake, string carModel, int tickets, Boolean fullCoverage = false, bool dui = false, int quote = 1)
         {
-            QuoteSubmission quoteApp = new QuoteSubmission();
 
-            if (string.IsNullOrEmpty(firstName)|| string.IsNullOrEmpty(lastName) || DOB.Equals(null) || string.IsNullOrEmpty(carMake) || string.IsNullOrEmpty(carModel))
+            List<QuoteSubmission> submission = new List<QuoteSubmission>();
+            var adminVms = new List<AdminVm>();
+            foreach (var signup in submission)
             {
-                return View("~/Views/Shared/Error.cshtml");
+                var adminVm = new AdminVm();
+                adminVm.Id = signup.Id;
+                adminVm.FirstName = signup.FirstName;
+                adminVm.LastName = signup.LastName;
+                adminVm.EmailAddress = signup.EmailAddress;
+                adminVm.DOB = signup.Dob.Date;
+                adminVm.CarYear = signup.CarYear;
+                adminVm.CarMake = signup.CarMake;
+                adminVm.CarModel = signup.CarModel;
+                adminVm.Dui = signup.Dui;
+                adminVm.Tickets = signup.Tickets;
+                adminVm.FullCoverabe = signup.FullCoverage;
+                adminVm.QuotedPrice = signup.QuotedPrice;
+
+                adminVms.Add(adminVm);
+                return View(adminVms);
             }
-          else if (carYear < 0 || tickets < 0)
-            {
-                return View("~/Views/Shared/Error.cshtml");
-            }
+          
+          
+
+                QuoteSubmission quoteApp = new QuoteSubmission();
+
+                if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || DOB.Equals(null) || string.IsNullOrEmpty(carMake) || string.IsNullOrEmpty(carModel))
+                {
+                    return View("~/Views/Shared/Error.cshtml");
+                }
+                else if (carYear < 0 || tickets < 0)
+                {
+                    return View("~/Views/Shared/Error.cshtml");
+                }
                 else
-            {
-                quoteApp.FirstName = firstName;
-                quoteApp.LastName = lastName;
-                quoteApp.EmailAddress = emailAddress;
-                quoteApp.Dob = DOB;
-                quoteApp.CarMake = carMake;
-                quoteApp.CarModel = carModel;
-                quoteApp.CarYear = carYear;
-                quoteApp.Dui = dui;
-                quoteApp.Tickets = tickets;
-                quoteApp.FullCoverage = fullCoverage;
+                {
+                    quoteApp.FirstName = firstName;
+                    quoteApp.LastName = lastName;
+                    quoteApp.EmailAddress = emailAddress;
+                    quoteApp.Dob = DOB;
+                    quoteApp.CarMake = carMake;
+                    quoteApp.CarModel = carModel;
+                    quoteApp.CarYear = carYear;
+                    quoteApp.Dui = dui;
+                    quoteApp.Tickets = tickets;
+                    quoteApp.FullCoverage = fullCoverage;
 
 
                 using (QuoteSubmission db = new QuoteSubmission())
                 {
-                    
+
                     var signup = new Table();
                     signup.FirstName = firstName;
                     signup.LastName = lastName;
@@ -57,7 +82,7 @@ namespace CarInsurance.Controllers
                     signup.DUI = dui;
                     signup.SpeedingTickets = tickets;
                     signup.CoverageType = fullCoverage;
-                    
+
                     quoteApp.QuotedPrice = Calculator.CalculateQuote(quoteApp);
                     signup.QUOTE = quoteApp.QuotedPrice;
 
@@ -65,10 +90,10 @@ namespace CarInsurance.Controllers
                     db.SaveChanges();
                 }
 
-                return View(new QuoteVm(quoteApp.QuotedPrice));
+                    return View(new QuoteVm(quoteApp.QuotedPrice));
+                }
+
 
             }
-           
         }
-    }
 }

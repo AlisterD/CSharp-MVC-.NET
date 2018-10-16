@@ -1,0 +1,29 @@
+﻿@using CarInsurance.ViewModels
+@model List<AdminVm>
+
+<center><h1>Quotes Administrator</h1></center>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Email</th>
+            <th scope="col">Quoted Price($)</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var quote in Model)
+        {
+            <tr>
+                <th scope="row">@quote.Id</th>
+                <td>@quote.FirstName</td>
+                <td>  @quote.LastName</td>
+                <td>  @quote.EmailAddress</td>
+                <td>@quote.QuotedPrice</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
